@@ -1,0 +1,27 @@
+<!-- If we want to configure an element with its attribute, the correct way of 
+ data binding is property binding i.e []="" -->
+ <!--String interpolation {{}}-->
+
+<!-- <div>
+  <button>
+    <img
+      [src]="'assets/users/' + selectedUser.avatar"
+      [alt]="selectedUser.name"
+    />
+    <span>{{ selectedUser.name }}</span
+    >
+  </button>
+</div> -->
+
+<!-- Keeping html simple & computing all data in ts file with getter getImageData -->
+ <!-- State handling >> onSelectUser -->
+<div>
+  <button (click)="onSelectUser()">
+    <img
+      [src]="getImagePath"
+      [alt]="selectedUser.name"
+    />
+    <span>{{ selectedUser.name }}</span
+    >
+  </button>
+</div>
