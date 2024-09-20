@@ -15,7 +15,7 @@
 
 <!-- Keeping html simple & computing all data in ts file with getter getImageData -->
  <!-- State handling >> onSelectUser -->
-<div>
+<!-- <div>
   <button (click)="onSelectUser()">
     <img
       [src]="getImagePath"
@@ -24,4 +24,18 @@
     <span>{{ selectedUser.name }}</span
     >
   </button>
+</div> -->
+
+<!--Signals-->
+<!-- Does not uses zone.js change detection mechanism -->
+<div>
+  <button (click)="onSelectUser()">
+    <img
+      [src]="imagepath()"
+      [alt]="selectedUser().name"
+    />
+    <span>{{ selectedUser().name }}</span
+    >
+  </button>
 </div>
+
