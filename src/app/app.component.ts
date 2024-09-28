@@ -14,10 +14,13 @@ import { TaskComponent } from './task/task.component';
 })
 
 export class AppComponent {
- public users = DUMMY_USERS;
- public taskOwnerName: string ='';
- onSelectUser(id:string){
-    const userName = this.users.find(user => user.id === id);
-    this.taskOwnerName = userName?.name || '';
- }
+    public users = DUMMY_USERS;
+    public taskOwnerName: string ='';
+    onSelectUser(id:string){
+        const userName = this.users.find(user => user.id === id);
+        this.taskOwnerName = userName?.name || '';
+    }
+    clearUser() {
+    this.taskOwnerName = '';
+    }
 }

@@ -3,25 +3,19 @@
 <main>
   <!--Users list-->
   <ul id="users">
+    @for (u of users; track u.id) {
     <li>
-      <app-user [user]="users[0]" (selectedUser)="onSelectUser($event)" />
+      <app-user [user]="u" (selectedUser)="onSelectUser($event)" />
     </li>
-    <li>
-      <app-user [user]="users[1]" (selectedUser)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[2]" (selectedUser)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[3]" (selectedUser)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[4]" (selectedUser)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[5]" (selectedUser)="onSelectUser($event)" />
-    </li>
+    } @empty {
+    <li>No users found</li>
+    }
   </ul>
   <!--Tasks component-->
-  <app-task [taskOwner]="taskOwnerName" />
+  @if (taskOwnerName) {
+    <app-task [taskOwner]="taskOwnerName" />
+  }
+  <!-- @if(taskOwnerName){
+    <button (click)="clearUser()"></button>
+  } -->
 </main>
