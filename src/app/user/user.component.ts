@@ -1,28 +1,19 @@
 import { Component, computed, EventEmitter, Input, input, Output, output } from '@angular/core';
-
-// type User = {
-//   id: string,
-//   avatar: string,
-//   name: string
-// }
-
-interface User {
-  id: string,
-  avatar: string,
-  name: string
-}
+import { UserType } from '../shared/shared.interface';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
 
 export class UserComponent {
 
-  @Input({required: true}) user!: User;
+  @Input({required: true}) user!: UserType;
+  @Input() highlightSelected: boolean = false;
   @Output() selectedUser = new EventEmitter<string>();
 
   get imagepath() {

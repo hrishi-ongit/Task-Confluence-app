@@ -3,27 +3,21 @@
 <main>
   <!--Users list-->
   <ul id="users">
-    <li *ngFor="for let u of users">
-      <app-user [user]="u" (selectedUser)="onSelectUser($event)" />
+    <li *ngFor="for; let u; of: users">
+      <app-user [user]="u" 
+      (selectedUser)="onSelectUser($event)"
+      [highlightSelected]="u.id === taskOwnerId"
+       />
     </li>
     <!-- <li>No users found</li> -->
   </ul>
-  <!--Tasks component-->
-  <!--Normal sructural directive usecase-->
-  <!-- <app-task *ngIf="taskOwnerName" [taskOwner]="taskOwnerName"/>  
-  <ng-template [ngIf]="!taskOwnerName"> -->
-    <!-- <ng-template *ngIf="!taskOwnerName"> This is incorrect as *ngIf already has hidden blick like mg-template -->
-    <!-- <p>Select a user to add Task</p>
-  </ng-template> -->
-
-
-
-  <!--Structural directive with templateRef-->
-  <app-task *ngIf="taskOwnerName; else fallBacktaskOwnerName" [taskOwner]="taskOwnerName"/>  
+  <app-task
+    *ngIf="taskOwnerName; else fallBacktaskOwnerName"
+    [taskOwner]="taskOwnerName"
+  />
   <ng-template #fallBacktaskOwnerName>
     <p>Select a user to add Task</p>
   </ng-template>
-  
 
-    <!-- <button (click)="clearUser()"></button> -->
+  <!-- <button (click)="clearUser()"></button> -->
 </main>

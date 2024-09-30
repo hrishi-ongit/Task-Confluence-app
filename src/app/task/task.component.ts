@@ -1,17 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UserTaskComponent } from "./user-task/user-task.component";
 import { NgFor } from '@angular/common';
 import { UserComponent } from "../user/user.component";
+import { CreateTaskComponent } from "./create-task/create-task.component";
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [UserTaskComponent, NgFor, UserComponent],
+  imports: [UserTaskComponent, NgFor, UserComponent, CreateTaskComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
+  
   @Input() taskOwner!: string;
+  @ViewChild('scrollableTasks') public scrollableTasks!: ElementRef;
+  
+
   public tasks =[
     {
       id: 't1',
@@ -37,5 +42,22 @@ export class TaskComponent {
       dueDate: '2024-06-15',
     }  
   ]
+  public newTask:string[] = [];
+
+  public deleteTask(id: string): void {
+    this.tasks = this.tasks.filter(tsk => tsk.id !== id);
+  }
+
+  public addNewTask(): void {
+   this.newTask.push((this.newTask.length+1).toString());
+   this.scrollToBottom();
+  }
+  
+  private scrollToBottom(): void {
+    setTimeout(() => {
+      const scrlContainer = this.scrollableTasks.nativeElement;
+      scrlContainer.scrollTop = scrlContainer.scrollHeight;
+    },0)
+  }
 
 }

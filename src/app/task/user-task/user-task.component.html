@@ -2,12 +2,12 @@
     <h2>{{task.title}}</h2>
     <time>{{task.dueDate}}</time>
     <p>{{task.summary}}</p>
-    <p class="actions">
-        <button>Complete</button>
-    </p>
-    <!-- id: string;
-  userId: string;
-  title: string;
-  summary: string;
-  dueDate: string; -->
+    <span class="actions">
+        <p class="actions1">
+            <button>Mark as Complete</button>
+        </p>
+        <p class="actions2">
+            <button (click)="deleteTask()">Delete</button>
+        </p>
+    </span>
 </article>
