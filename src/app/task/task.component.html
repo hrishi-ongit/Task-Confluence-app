@@ -1,1 +1,23 @@
-<h1>{{taskOwner}}</h1>
+    <section id="tasks">
+        <header>
+            <h2>{{taskOwner}} ' tasks</h2>
+            <menu>
+                <button>Add Task</button>
+            </menu>
+        </header>
+        <ul>
+            <!-- @for (task of tasks; track $index) {
+                <li>
+                    <app-user-task [task]="task"/>
+                </li>
+            } -->
+            <!-- @for (task of tasks; track tasks[0].id) {
+                <li>
+                    <app-user-task [task]="task"/>
+                </li>
+            } -->
+            <li *ngFor="let task of tasks">
+                <app-user-task [task]="task"/>
+            </li>
+        </ul>
+    </section>
