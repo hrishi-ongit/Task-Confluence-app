@@ -3,7 +3,7 @@
 <main>
   <!--Users list-->
   <ul id="users">
-    <li *ngFor="for; let u; of: users">
+    <li *ngFor="let u of users">
       <app-user [user]="u" 
       (selectedUser)="onSelectUser($event)"
       [highlightSelected]="u.id === taskOwnerId"
