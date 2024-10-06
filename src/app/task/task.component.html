@@ -2,7 +2,7 @@
   <header>
     <h2>{{ taskOwner }} ' tasks</h2>
     <menu>
-      <button (click)="addNewTask()">Add Task</button>
+      <button (click)="onAddNewTask()">Add Task</button>
     </menu>
   </header>
   <ul #scrollableTasks >
@@ -16,9 +16,13 @@
     <li>
       <app-user-task [task]="task" (selectedTask)="deleteTask($event)" />
     </li>
-    } @for (n of newTask; track $index) {
-    <app-create-task [taskIndex]="n" />
+    } 
+    @if(addNewTask){
+      <app-create-task (cancleTask)="onCancleTask()"/>
     }
+    <!-- @for (n of newTask; track $index) {
+    <app-create-task [taskIndex]="n" />
+    } -->
     <!-- or -->
     <!-- @for (task of tasks; track $index) {
                 <li>

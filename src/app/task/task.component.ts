@@ -42,22 +42,28 @@ export class TaskComponent {
       dueDate: '2024-06-15',
     }  
   ]
+  public addNewTask: boolean = false;
   public newTask:string[] = [];
 
   public deleteTask(id: string): void {
     this.tasks = this.tasks.filter(tsk => tsk.id !== id);
   }
 
-  public addNewTask(): void {
-   this.newTask.push((this.newTask.length+1).toString());
-   this.scrollToBottom();
+  public onAddNewTask(): void {
+  //  this.newTask.push((this.newTask.length+1).toString());
+  //  this.scrollToBottom();
+  this.addNewTask = true;
   }
+  public onCancleTask(): void {
+    this.addNewTask = false;
+    }
   
-  private scrollToBottom(): void {
-    setTimeout(() => {
-      const scrlContainer = this.scrollableTasks.nativeElement;
-      scrlContainer.scrollTop = scrlContainer.scrollHeight;
-    },0)
-  }
+  
+  // private scrollToBottom(): void {
+  //   setTimeout(() => {
+  //     const scrlContainer = this.scrollableTasks.nativeElement;
+  //     scrlContainer.scrollTop = scrlContainer.scrollHeight;
+  //   },0)
+  // }
 
 }
