@@ -1,0 +1,15 @@
+<!-- <div>
+    <p>Card works</p>
+</div> -->
+<!-- In above code, as we are using the card's css as a shared style,
+we need the other template wrapped with this cards template i.e the above div
+But if this div has some other content like the <p> as above, it will directly replace
+the wrapped material for which we target to applly the css stylinjg -->
+
+<!-- Here comes the use of Content Projection <ng-content> -->
+    <!-- ng-content keeps is for rendering the expected wrapped content
+     by applying the shared style  -->
+<div>
+    <ng-content/>
+    <!-- <p>Card works</p> -->
+</div>

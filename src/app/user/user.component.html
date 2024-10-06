@@ -1,13 +1,15 @@
-<div>
-  <button [class.active]="highlightSelected" (click)="selectUser()">
-    <!-- another way for applying css class -->
-  <!-- <button [ngClass]="highlightSelected ? 'active': ''" (click)="selectUser()"> -->
-    <img
-      [src]="imagepath"
-      [alt]="user.name"
-    />
-    <span>{{ user.name }}</span
-    >
-  </button>
-</div>
+<app-card>
+  <div>
+    <button [class.active]="highlightSelected" (click)="selectUser()">
+      <!-- another way for applying css class -->
+    <!-- <button [ngClass]="highlightSelected ? 'active': ''" (click)="selectUser()"> -->
+      <img
+        [src]="imagepath"
+        [alt]="user.name"
+      />
+      <span>{{ user.name }}</span
+      >
+    </button>
+  </div>
+</app-card>
 
