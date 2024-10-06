@@ -1,11 +1,66 @@
-.backdrop {
+/* .backdrop {
     background-color: rgba(0, 0, 0, 0.9);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
+  } */
+
+
+  /* Add a Blur Effect
+  Dark overlay with reduced opacity
+  Applies the blur to the content behind */
+  /* .backdrop {
+    background-color: rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(10px); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+} */
+
+
+/* Add a Gradient Overlay
+A subtle gradient on top */
+ /* Blur effect */
+/* .backdrop {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5), 
+      rgba(0, 0, 0, 0.5)
+  ); 
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+} */
+
+
+
+/* Add an Animation */
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  animation: fadeIn 0.9s ease-in-out forwards; 
+  /* Smooth fade-in animation */
+}
+@keyframes fadeIn { 
+  to {
+      opacity: 1;
   }
+}
+
+
+
   
   dialog {
     width: 90%;

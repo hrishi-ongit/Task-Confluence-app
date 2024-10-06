@@ -18,7 +18,7 @@
     </li>
     } 
     @if(!tasks.length){
-      <p>No tasks present</p>
+      <p>No tasks available</p>
     }
     @if(addNewTask){
       <app-create-task (cancleTask)="onCancleTask()" (createTask)="onCreateTask($event)"/>

@@ -1,15 +1,19 @@
 import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { type TaskType } from '../../shared/shared.interface';
+import { TaskComponent } from '../task.component';
 
 @Component({
   selector: 'app-create-task',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TaskComponent],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.css'
 })
 export class CreateTaskComponent {
+  constructor(private _taskComponent: TaskComponent){
+  }
+
   @Input() taskIndex: string = '';
   @Output() cancleTask =  new EventEmitter;
   @Output() createTask =  new EventEmitter<TaskType>();
@@ -27,19 +31,14 @@ export class CreateTaskComponent {
   }
 
   public onSubmit(): void {
-    console.log({
-      title: this.enteredTitle,
-      summary: this.enteredSummary,
-      date: this.enteredDate
-    });
-    console.log('task submitted');
     //send the new task to be added in tasks array
     this.createTask.emit({
-      id: this.enteredTitle,
+      id: 't1' + this._taskComponent.tasks.length ,
       userId: 'xu1',
-      title: this.enteredTitle,
-      summary: this.enteredSummary,
-      dueDate: this.getDate()
+      title: this.enteredTitle || '< No Title >',
+      summary: this.enteredSummary || '< No Summary >',
+      dueDate: this.enteredDate,
+      createdOn: this.getDate()
     });
   }
   private getDate(): string {

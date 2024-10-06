@@ -1,8 +1,19 @@
 <app-card>
     <article>
         <h2>{{task.title}}</h2>
-        <time>{{task.dueDate}}</time>
-        <p>{{task.summary}}</p>
+        <h3>{{task.summary}}</h3>
+        <!-- <time>{{task.dueDate}}</time> -->
+         <!-- This is angular pipe service, example date pipe -->
+         <!-- Use pipes to transform strings, currency amounts, dates, and other data for display. -->
+        <!-- <time>{{task.dueDate | date}}</time> -->
+        <!-- <time>{{task.dueDate | date: 'short'}}</time> -->
+         <div [ngStyle]="{'margin-top' : '10px'}">
+            <span>Created On</span>
+            <span id="datePipe">
+                <time>{{task.createdOn| date: 'fullDate'}}</time>
+                <time [ngStyle]="{'font-style': 'italic'}" >Due : {{task.dueDate | date}}</time>
+            </span>
+        </div>
         <span class="actions">
             <p class="actions1">
                 <button>Mark as Complete</button>
