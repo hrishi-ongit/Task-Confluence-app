@@ -37,7 +37,7 @@ export class CreateTaskComponent {
       userId: 'xu1',
       title: this.enteredTitle || '< No Title >',
       summary: this.enteredSummary || '< No Summary >',
-      dueDate: this.enteredDate || '< Not provided >',
+      dueDate: this.enteredDate,
       createdOn: this.getDate()
     });
   }

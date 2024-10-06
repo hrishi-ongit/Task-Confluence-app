@@ -11,7 +11,7 @@
             <span>Created On</span>
             <span id="datePipe">
                 <time>{{task.createdOn| date: 'fullDate'}}</time>
-                <time [ngStyle]="{'font-style': 'italic'}" >Due : {{task.dueDate | date}}</time>
+                <time [ngStyle]="{'font-style': 'italic'}" >Due : {{task.dueDate ? (task.dueDate | date) : 'No date provided'}}</time>
             </span>
         </div>
         <span class="actions">
