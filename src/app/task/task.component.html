@@ -17,8 +17,11 @@
       <app-user-task [task]="task" (selectedTask)="deleteTask($event)" />
     </li>
     } 
+    @if(!tasks.length){
+      <p>No tasks present</p>
+    }
     @if(addNewTask){
-      <app-create-task (cancleTask)="onCancleTask()"/>
+      <app-create-task (cancleTask)="onCancleTask()" (createTask)="onCreateTask($event)"/>
     }
     <!-- @for (n of newTask; track $index) {
     <app-create-task [taskIndex]="n" />
