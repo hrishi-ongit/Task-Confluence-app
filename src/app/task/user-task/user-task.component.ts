@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TaskType } from '../../shared/shared.interface';
+import { ITask } from '../../shared/shared.interface';
 import { CardComponent } from "../../shared/card/card.component";
 import { DatePipe, NgStyle } from '@angular/common';
 
@@ -13,7 +13,7 @@ import { DatePipe, NgStyle } from '@angular/common';
 
 export class UserTaskComponent {
 
-  @Input() task!: TaskType;
+  @Input() task!: ITask;
   @Output() selectedTask = new EventEmitter<string>();
 
   public deleteTask() {

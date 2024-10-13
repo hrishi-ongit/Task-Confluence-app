@@ -1,9 +1,10 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { UserTaskComponent } from "./user-task/user-task.component";
 import { NgFor } from '@angular/common';
 import { UserComponent } from "../user/user.component";
 import { CreateTaskComponent } from "./create-task/create-task.component";
-import { type TaskType } from '../shared/shared.interface';
+import { type ITask } from '../shared/shared.interface';
+import { DUMMY_USERS } from '../dummy-users';
 
 @Component({
   selector: 'app-task',
@@ -12,50 +13,24 @@ import { type TaskType } from '../shared/shared.interface';
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
-export class TaskComponent {
+export class TaskComponent implements OnChanges {
+  ngOnChanges(): void {
+    this.tasks = DUMMY_USERS.filter((tsk) => tsk.name === this.taskOwner)?.[0].tasks;
+  }
   @Input() taskOwner!: string;
   @ViewChild('scrollableTasks') public scrollableTasks!: ElementRef;
+  public tasks: ITask[] = [];
 
-  public tasks = [
-    {
-      "id": "t1",
-      "userId": "u1",
-      "title": "Master Angular",
-      "summary": "Learn all the basic and advanced features of Angular & how to apply them.",
-      "dueDate": "2025-12-31",
-      "createdOn": "2024-01-01"
-  },
-  {
-      "id": "t2",
-      "userId": "u3",
-      "title": "Build first prototype",
-      "summary": "Build a first prototype of the online shop website",
-      "dueDate": "2024-05-31",
-      "createdOn": "2024-01-01"
-  },
-  {
-      "id": "t3",
-      "userId": "u3",
-      "title": "Prepare issue template",
-      "summary": "Prepare and describe an issue template which will help with project management",
-      "dueDate": "2024-06-15",
-      "createdOn": "2024-01-01"
-  },
-  {
-      "id": "t13",
-      "userId": "xu1",
-      "title": "< No Title >",
-      "summary": "< No Summary >",
-      "dueDate": "2024-10-31",
-      "createdOn": "2024-01-01"
-  }
-  ];
   public addNewTask: boolean = false;
   public newTask: string[] = [];
   public dateOfCreation: string = '';
 
   public deleteTask(id: string): void {
-    this.tasks = this.tasks.filter((tsk) => tsk.id !== id);
+    const currentUser = DUMMY_USERS.find(user => user.name === this.taskOwner);
+    if (currentUser) {
+      currentUser.tasks = currentUser.tasks.filter((tsk) => tsk.id !== id) || [];
+      this.tasks = currentUser.tasks;
+    }
   }
 
   public onAddNewTask(): void {
@@ -67,13 +42,15 @@ export class TaskComponent {
     this.addNewTask = false;
   }
 
-  public onCreateTask(taskData: TaskType): void {
+  public onCreateTask(taskData: ITask): void {
     console.log('Due date : ', taskData.dueDate);
     this.tasks.push(taskData);
+    const currentUser = DUMMY_USERS.find(user => user.name === this.taskOwner);
+    if (currentUser) {
+      currentUser.tasks = this.tasks;
+    }
     this.addNewTask = false;
-    this.scrollToBottom();//I use this to forcefully scroll to bottom of overflow view to focus the new task added
-    // window.location.reload();..this is used to reload the entire app..cab be used when form submit data is connected to db 
-    // this.router.navigate(['/']);
+    this.scrollToBottom();
   }
   
   //HK</> To hard scoll to the bottom

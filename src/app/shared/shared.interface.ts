@@ -1,10 +1,11 @@
-export interface UserType {
+export interface IUser {
     id: string,
     avatar: string,
     name: string
+    tasks: ITask[]
   }
 
-export interface TaskType {
+export interface ITask {
     id: string;
     userId: string;
     title: string;
