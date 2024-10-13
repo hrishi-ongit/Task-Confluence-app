@@ -1,9 +1,9 @@
 import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { UserTaskComponent } from "./user-task/user-task.component";
-import { NgFor } from '@angular/common';
+import { JsonPipe, NgFor } from '@angular/common';
 import { UserComponent } from "../user/user.component";
 import { CreateTaskComponent } from "./create-task/create-task.component";
-import { type ITask } from '../shared/shared.interface';
+import { IUser, type ITask } from '../shared/shared.interface';
 import { DUMMY_USERS } from '../dummy-users';
 
 @Component({
@@ -14,9 +14,6 @@ import { DUMMY_USERS } from '../dummy-users';
   styleUrl: './task.component.css',
 })
 export class TaskComponent implements OnChanges {
-  ngOnChanges(): void {
-    this.tasks = DUMMY_USERS.filter((tsk) => tsk.name === this.taskOwner)?.[0].tasks;
-  }
   @Input() taskOwner!: string;
   @ViewChild('scrollableTasks') public scrollableTasks!: ElementRef;
   public tasks: ITask[] = [];
@@ -25,17 +22,19 @@ export class TaskComponent implements OnChanges {
   public newTask: string[] = [];
   public dateOfCreation: string = '';
 
+  ngOnChanges(): void {
+    this.tasks = JSON.parse(JSON.stringify((DUMMY_USERS.find(user => user.name === this.taskOwner))?.tasks || []));
+  }
+
   public deleteTask(id: string): void {
     const currentUser = DUMMY_USERS.find(user => user.name === this.taskOwner);
     if (currentUser) {
-      currentUser.tasks = currentUser.tasks.filter((tsk) => tsk.id !== id) || [];
-      this.tasks = currentUser.tasks;
+      currentUser.tasks = currentUser.tasks.filter(tsk => tsk.id !== id);
+      this.tasks = JSON.parse(JSON.stringify(currentUser.tasks));
     }
   }
 
   public onAddNewTask(): void {
-    //  this.newTask.push((this.newTask.length+1).toString());
-    //  this.scrollToBottom();
     this.addNewTask = true;
   }
   public onCancleTask(): void {
@@ -47,21 +46,11 @@ export class TaskComponent implements OnChanges {
     this.tasks.push(taskData);
     const currentUser = DUMMY_USERS.find(user => user.name === this.taskOwner);
     if (currentUser) {
-      currentUser.tasks = this.tasks;
+      currentUser.tasks = JSON.parse(JSON.stringify(this.tasks));
     }
     this.addNewTask = false;
     this.scrollToBottom();
   }
-  
-  //HK</> To hard scoll to the bottom
-  // private scrollToBottom(): void {
-  //   setTimeout(() => {
-  //     const scrlContainer = this.scrollableTasks.nativeElement;
-  //     scrlContainer.scrollTop = scrlContainer.scrollHeight;
-  //   },0)
-  // }
-    
-  // }
 
   private scrollToBottom(): void {
     const scrlContainer = this.scrollableTasks.nativeElement;

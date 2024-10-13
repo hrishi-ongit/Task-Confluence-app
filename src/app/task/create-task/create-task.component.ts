@@ -31,7 +31,6 @@ export class CreateTaskComponent {
   }
 
   public onSubmit(): void {
-    //send the new task to be added in tasks array
     this.createTask.emit({
       id: 't1' + this._taskComponent.tasks.length ,
       userId: 'xu1',
