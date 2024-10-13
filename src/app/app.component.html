@@ -13,7 +13,7 @@
   </ul>
   <app-task
     *ngIf="taskOwnerName; else fallBacktaskOwnerName"
-    [taskOwner]="taskOwnerName"
+    [taskOwnerName]="taskOwnerName"
   />
   <ng-template #fallBacktaskOwnerName>
     <p>Select any user to see/add Tasks</p>

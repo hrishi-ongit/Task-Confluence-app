@@ -18,7 +18,7 @@ export class TaskComponent implements OnChanges {
 
   constructor (private _taskService: TaskService){}
 
-  @Input() taskOwner!: string;
+  @Input() taskOwnerName!: string;
   @ViewChild('scrollableTasks') public scrollableTasks!: ElementRef;
   public tasks: ITask[] = [];
 
@@ -27,15 +27,15 @@ export class TaskComponent implements OnChanges {
   public dateOfCreation: string = '';
 
   ngOnChanges(): void {
-    this.tasks = this._taskService.getUserTasks(this.taskOwner);
+    this.tasks = this._taskService.getUserTasks(this.taskOwnerName);
   }
 
   public deleteTask(id: string): void {
-    this.tasks = this._taskService.deleteTask(id, this.taskOwner);
+    this.tasks = this._taskService.deleteTask(id, this.taskOwnerName);
   }
-  
+
   public onCreateTask(taskData: ITask): void {
-    this.tasks = this._taskService.updateUserTask(taskData, this.taskOwner);
+    this.tasks = this._taskService.updateUserTask(taskData, this.taskOwnerName);
     this.addNewTask = false;
     this.scrollToBottom();
   }
