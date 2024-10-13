@@ -1,5 +1,5 @@
 import { Component, computed, EventEmitter, Input, input, Output, output } from '@angular/core';
-import { UserType } from '../shared/shared.interface';
+import { IUser } from '../shared/shared.interface';
 import { NgClass } from '@angular/common';
 import { CardComponent } from "../shared/card/card.component";
 
@@ -13,7 +13,7 @@ import { CardComponent } from "../shared/card/card.component";
 
 export class UserComponent {
 
-  @Input({required: true}) user!: UserType;
+  @Input({required: true}) user!: IUser;
   @Input() highlightSelected: boolean = false;
   @Output() selectedUser = new EventEmitter<string>();
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { type TaskType } from '../../shared/shared.interface';
+import { type ITask } from '../../shared/shared.interface';
 import { TaskComponent } from '../task.component';
 
 @Component({
@@ -16,7 +16,7 @@ export class CreateTaskComponent {
 
   @Input() taskIndex: string = '';
   @Output() cancleTask =  new EventEmitter;
-  @Output() createTask =  new EventEmitter<TaskType>();
+  @Output() createTask =  new EventEmitter<ITask>();
   public enteredTitle: string = '';
   public enteredSummary: string = '';
   public enteredDate: string = '';
