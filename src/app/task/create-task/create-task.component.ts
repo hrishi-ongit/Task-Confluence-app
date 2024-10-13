@@ -44,7 +44,6 @@ export class CreateTaskComponent {
     const month = new Date().getMonth()+1 < 10 ? new Date().getMonth().toString().padStart(2,'0') : (new Date().getMonth()+1).toString();
     const day = new Date().getDate() < 10 ? new Date().getDate().toString().padStart(2,'0') : new Date().getDate().toString();
     const year = (new Date().getFullYear()).toString();
-    console.log(`${year}-${month}-${day}`);
     return `${year}-${month}-${day}`
   }
 

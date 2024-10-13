@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { UserTaskComponent } from "./user-task/user-task.component";
-import { JsonPipe, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { UserComponent } from "../user/user.component";
 import { CreateTaskComponent } from "./create-task/create-task.component";
-import { IUser, type ITask } from '../shared/shared.interface';
+import { type ITask } from '../shared/shared.interface';
 import { DUMMY_USERS } from '../dummy-users';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-task',
@@ -14,6 +15,9 @@ import { DUMMY_USERS } from '../dummy-users';
   styleUrl: './task.component.css',
 })
 export class TaskComponent implements OnChanges {
+
+  constructor (private _taskService: TaskService){}
+
   @Input() taskOwner!: string;
   @ViewChild('scrollableTasks') public scrollableTasks!: ElementRef;
   public tasks: ITask[] = [];
@@ -23,15 +27,17 @@ export class TaskComponent implements OnChanges {
   public dateOfCreation: string = '';
 
   ngOnChanges(): void {
-    this.tasks = JSON.parse(JSON.stringify((DUMMY_USERS.find(user => user.name === this.taskOwner))?.tasks || []));
+    this.tasks = this._taskService.getUserTasks(this.taskOwner);
   }
 
   public deleteTask(id: string): void {
-    const currentUser = DUMMY_USERS.find(user => user.name === this.taskOwner);
-    if (currentUser) {
-      currentUser.tasks = currentUser.tasks.filter(tsk => tsk.id !== id);
-      this.tasks = JSON.parse(JSON.stringify(currentUser.tasks));
-    }
+    this.tasks = this._taskService.deleteTask(id, this.taskOwner);
+  }
+  
+  public onCreateTask(taskData: ITask): void {
+    this.tasks = this._taskService.updateUserTask(taskData, this.taskOwner);
+    this.addNewTask = false;
+    this.scrollToBottom();
   }
 
   public onAddNewTask(): void {
@@ -41,16 +47,6 @@ export class TaskComponent implements OnChanges {
     this.addNewTask = false;
   }
 
-  public onCreateTask(taskData: ITask): void {
-    console.log('Due date : ', taskData.dueDate);
-    this.tasks.push(taskData);
-    const currentUser = DUMMY_USERS.find(user => user.name === this.taskOwner);
-    if (currentUser) {
-      currentUser.tasks = JSON.parse(JSON.stringify(this.tasks));
-    }
-    this.addNewTask = false;
-    this.scrollToBottom();
-  }
 
   private scrollToBottom(): void {
     const scrlContainer = this.scrollableTasks.nativeElement;
