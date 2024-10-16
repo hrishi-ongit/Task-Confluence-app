@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { type ITask } from '../../shared/shared.interface';
 import { TaskComponent } from '../task.component';
 
 @Component({
   selector: 'app-create-task',
-  standalone: true,
-  imports: [FormsModule, TaskComponent],
+  // standalone: true,
+  // imports: [FormsModule, TaskComponent],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.css'
 })

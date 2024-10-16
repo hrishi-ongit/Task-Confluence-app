@@ -9,8 +9,8 @@ import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-task',
-  standalone: true,
-  imports: [UserTaskComponent, NgFor, UserComponent, CreateTaskComponent],
+  // standalone: true,
+  // imports: [UserTaskComponent, NgFor, UserComponent, CreateTaskComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
