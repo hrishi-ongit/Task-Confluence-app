@@ -5,13 +5,14 @@ import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { DUMMY_USERS } from './dummy-users';
 import { TaskComponent } from './task/task.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [HeaderComponent, UserComponent, TaskComponent, NgFor, NgIf]
+    imports: [HeaderComponent, UserComponent, TaskComponent, NgFor, NgIf, RouterOutlet]
 })
 
 export class AppComponent {

@@ -6,11 +6,12 @@ import { CreateTaskComponent } from "./create-task/create-task.component";
 import { type ITask } from '../shared/shared.interface';
 import { DUMMY_USERS } from '../dummy-users';
 import { TaskService } from './task.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [UserTaskComponent, NgFor, UserComponent, CreateTaskComponent],
+  imports: [UserTaskComponent, NgFor, UserComponent, CreateTaskComponent, RouterLink],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
